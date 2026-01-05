@@ -1,0 +1,60 @@
+from main import task_list
+
+def add_task() :
+  task = input("Pleasen Enter The Task You Need To Add: ").strip()
+  if not task:
+    print("You Must Enter A Task")
+  task_info = {"task_name": task, "completed": False}
+  global task_list
+  task_list = task_list + [task_info]
+  print("Task added successfully")
+
+
+def mark_task_complete():
+  # I Could Use List Comprehension With Enumerate But I Prefered To Do It Fundamentally.
+  incompleted_tasks = []
+  i = 1
+  for j in range(0, len(task_list)): # I Could Use "for task in task_list" Instead.
+    if not task_list[j]["completed"] :
+      incompleted_tasks += [task_list[j]] # I Could Use append() Instead, But I Prefered To Do It Fundamentally.
+      print(i, "-", task_list[j]["task_name"])
+      i += 1
+      print("-" * 30)
+
+  # Stop The Function If All Tasks Are Completed
+  if not incompleted_tasks :
+    print("No Incompleted Tasks")
+    return
+
+  while True:
+    try:
+      task = int(input("Please Enter The Number of Task You've Completed: ").strip())
+  
+      if task < 1 or task > len(incompleted_tasks) :
+        raise IndexError()
+  
+      # Here, The Original List Will Be Upadated Too
+      incompleted_tasks[task - 1]["completed"] = True
+      print("This Task \"" + incompleted_tasks[task - 1]["task_name"] + "\" Has Been Marked As Completed")
+      return
+  
+    except ValueError:
+      print("Please Input A Number")
+    except IndexError:
+      print("Invalid Number, You Only Have", len(incompleted_tasks), "Incompleted Tasks")
+
+
+def view_tasks():
+  if not task_list :
+    print("You Have No Tasks Today")
+    return
+
+  print("Today Tasks Are:")
+  index = 0
+  while index < len(task_list):
+    status = '\u2713' if task_list[index]['completed'] else "\u2717"
+    # \u2713 Is The Unicode For Check Mark
+    # \u2717 Is The Unicode For Cross Mark
+
+    print(index + 1, ". ", status, " ", task_list[index]['task_name'], sep="")
+    index += 1
