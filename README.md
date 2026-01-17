@@ -1,7 +1,7 @@
 # 📝 To-Do List CLI Project (Python)
 
 A simple **command-line To-Do List application** built with Python 3.  
-This project is part of my learning journey — designed to help me practice Python basics like loops, functions, and user input. :contentReference[oaicite:0]{index=0}
+This project is part of my learning journey — designed to help me practice Python basics like loops, functions, and user input.
 
 ---
 
